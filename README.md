@@ -1,77 +1,92 @@
 # Frontend Review Skills
 
-A growing collection of Agent Skills for practical frontend engineering
-reviews.
+Agent skills for practical frontend engineering reviews.
 
-[![skills.sh](https://skills.sh/b/DNM03/frontend-code-review)](https://skills.sh/DNM03/frontend-code-review)
-
-## Available skills
+## Available Skill
 
 ### `frontend-code-review`
 
 Review React, Next.js, TypeScript, Tailwind CSS, shadcn/ui, and TanStack Query
-code for production risks and UI quality.
+code for:
+
+- runtime bugs and production risks
+- React and Next.js Server/Client Component boundaries
+- data fetching, mutations, and cache behavior
+- TypeScript contracts
+- accessibility and responsive UI
+- loading, empty, error, and disabled states
+- performance and SEO metadata
+
+The skill prioritizes concrete findings with severity, impact, and focused
+fixes. For repository reviews, it reports clickable file and line references.
+For isolated snippets, it separates verified issues from context-dependent
+considerations.
 
 ## Install
 
-After publishing this repository to GitHub, list the available skills with:
+List the available skills:
 
 ```bash
 npx skills add DNM03/frontend-code-review --list
 ```
 
-Install `frontend-code-review` for Codex with:
+Install for Codex:
 
 ```bash
-npx skills add DNM03/frontend-code-review --skill frontend-code-review --agent codex
+npx skills add DNM03/frontend-code-review \
+  --skill frontend-code-review \
+  --agent codex
 ```
 
-Install it for Claude Code with:
+Install for Claude Code:
 
 ```bash
-npx skills add DNM03/frontend-code-review --skill frontend-code-review --agent claude-code
+npx skills add DNM03/frontend-code-review \
+  --skill frontend-code-review \
+  --agent claude-code
 ```
 
-The repository keeps installable packages under `skills/<skill-name>/`, which
-is one of the layouts discovered by the `skills` CLI.
+Add `--global` to install the skill for all projects.
 
-## Publish
+## Use
 
-`skills.sh` installs skills from Git repositories. There is no separate package
-upload step for this layout.
+Start a fresh agent session after installation.
 
-```bash
-git init
-git add .
-git commit -m "feat: publish frontend review skills"
-gh repo create DNM03/frontend-code-review --public --source=. --remote=origin --push
-```
-
-There is no separate upload or submission step. After pushing, run one install
-from the GitHub source so `skills.sh` can discover the repository through
-anonymous CLI telemetry:
-
-```bash
-npx skills add DNM03/frontend-code-review --skill frontend-code-review --agent codex
-```
-
-## Structure
+Review the current branch:
 
 ```txt
-frontend-code-review/
-├── README.md
-├── LICENSE
-├── evals/
-└── skills/
-    └── frontend-code-review/
-        ├── SKILL.md
-        ├── agents/
-        │   └── openai.yaml
-        ├── references/
-        └── examples/
+Use $frontend-code-review to review the current branch against main.
+Prioritize production bugs, accessibility, UX states, and maintainability.
+Report severity-ordered findings with clickable file and line references.
 ```
 
-## Evaluate
+Review one file:
 
-Use the manual A/B workflow in [`evals/README.md`](evals/README.md) to compare
-fresh Codex reviews with and without a skill.
+```txt
+Use $frontend-code-review to review src/components/CreateJobForm.tsx.
+```
+
+Review a pasted snippet without repository assumptions:
+
+```txt
+Use $frontend-code-review to review only this pasted snippet.
+Do not inspect repository context.
+```
+
+## Contributing
+
+Installable skills live under `skills/`. Evaluation fixtures and the manual A/B
+workflow live under [`evals/`](evals/README.md).
+
+```txt
+skills/
+└── frontend-code-review/
+    ├── SKILL.md
+    ├── agents/
+    ├── references/
+    └── examples/
+```
+
+## License
+
+[MIT](LICENSE)
