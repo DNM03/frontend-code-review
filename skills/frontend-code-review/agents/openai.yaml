@@ -1,0 +1,4 @@
+interface:
+  display_name: "Frontend Code Review"
+  short_description: "Review frontend code for production risks"
+  default_prompt: "Use $frontend-code-review to review this frontend code for production readiness."
