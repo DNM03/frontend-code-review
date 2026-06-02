@@ -10,9 +10,9 @@ Review whether the page feels fast, stable, and responsive.
 
 Core Web Vitals focus on user experience signals around:
 
-- loading performance
-- responsiveness/interactivity
-- visual stability
+- loading performance: Largest Contentful Paint (LCP)
+- responsiveness/interactivity: Interaction to Next Paint (INP)
+- visual stability: Cumulative Layout Shift (CLS)
 
 When reviewing frontend code, look for causes of:
 
@@ -37,6 +37,8 @@ Check for:
 - sequential requests that could be parallel
 - overly broad query invalidation
 - no caching strategy for expensive server data
+- LCP images that are lazy-loaded or discovered late
+- long event handlers or heavy client JavaScript that delay interaction feedback
 
 ## Next.js image/layout review
 
@@ -46,6 +48,9 @@ Check:
 - layout does not jump during loading
 - above-the-fold content is prioritized
 - loading fallback does not cause major layout shift
+- above-the-fold and likely LCP images are not lazy-loaded
+- responsive image sizing avoids downloading unnecessarily large files
+- fetch priority is used selectively for truly important images
 
 ## SEO metadata
 
@@ -149,6 +154,7 @@ For localized pages, check:
 - `alternates.languages` points to equivalent pages in other locales
 - unsupported locale routes do not silently render fallback content
 - `x-default` is set when the project has a global/default route strategy
+- sitemap URLs, canonicals, and locale alternates remain consistent
 
 ## Open Graph
 

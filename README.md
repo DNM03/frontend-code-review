@@ -6,16 +6,18 @@ Agent skills for practical frontend engineering reviews.
 
 ### `frontend-code-review`
 
-Review React, Next.js, TypeScript, Tailwind CSS, shadcn/ui, and TanStack Query
-code for:
+Review React, Next.js App Router, TypeScript, Tailwind CSS, shadcn/ui, and
+TanStack Query code for:
 
 - runtime bugs and production risks
 - React and Next.js Server/Client Component boundaries
-- data fetching, mutations, and cache behavior
+- Server Actions, route handlers, and cache invalidation
+- data fetching, mutations, query keys, and request waterfalls
+- frontend security boundaries, unsafe HTML, URLs, and secrets
 - TypeScript contracts
 - accessibility and responsive UI
 - loading, empty, error, and disabled states
-- performance and SEO metadata
+- performance, SEO metadata, and localization gaps
 
 The skill prioritizes concrete findings with severity, impact, and focused
 fixes. For repository reviews, it reports clickable file and line references.
@@ -75,8 +77,8 @@ Do not inspect repository context.
 
 ## Contributing
 
-Installable skills live under `skills/`. Evaluation fixtures and the manual A/B
-workflow live under [`evals/`](evals/README.md).
+Installable skills live under `skills/`. The committed regression fixtures and
+manual A/B workflow live under [`evals/`](evals/README.md).
 
 ```txt
 skills/

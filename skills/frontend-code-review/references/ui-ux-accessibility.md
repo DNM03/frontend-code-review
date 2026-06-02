@@ -150,6 +150,7 @@ Interactive controls should visibly support states:
 - aria-selected
 - data-state
 - dark mode when relevant
+- reduced motion with `motion-reduce` when animation is non-essential
 
 Example:
 
@@ -163,6 +164,9 @@ Example:
 
 shadcn/ui is a component distribution pattern, not a black-box component library.
 
+Current shadcn/ui projects may use Radix or Base UI primitives. Inspect the copied component
+implementation before assuming primitive-specific behavior.
+
 Review whether the project:
 
 - keeps components consistent after copying them in
@@ -171,6 +175,20 @@ Review whether the project:
 - avoids one-off component variants everywhere
 - keeps form messages and labels connected
 - avoids editing shared components in ways that break accessibility
+
+## Dialogs and complex widgets
+
+For dialogs, check:
+
+- focus moves inside when opened
+- focus remains trapped while modal
+- Escape closes when appropriate
+- a visible close or cancel control exists
+- focus returns to the trigger or the next logical element
+- title and description are connected
+
+For menus, comboboxes, tabs, grids, and custom controls, verify expected keyboard behavior. Prefer
+maintained accessible primitives over hand-built behavior when requirements are non-trivial.
 
 ## Native HTML first
 

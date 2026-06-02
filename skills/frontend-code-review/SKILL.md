@@ -1,6 +1,6 @@
 ---
 name: frontend-code-review
-description: Review React, Next.js, TypeScript, Tailwind CSS, shadcn/ui, TanStack Query, and frontend UI code. Use when reviewing a PR, branch, diff, page, component, hook, or API client; debugging frontend behavior; assessing production readiness; or checking runtime bugs, client/server boundaries, data fetching, accessibility, UX states, responsive layout, performance, SEO metadata, and maintainability.
+description: Review React, Next.js App Router, TypeScript, Tailwind CSS, shadcn/ui, TanStack Query, and frontend UI code. Use when reviewing a PR, branch, diff, page, component, hook, Server Action, route handler, or API client; debugging frontend behavior; assessing production readiness; or checking runtime bugs, client/server boundaries, data fetching, security, accessibility, UX states, responsive layout, performance, SEO metadata, i18n, and maintainability.
 ---
 
 # Frontend Code Review Skill
@@ -23,6 +23,8 @@ When reviewing a pasted snippet:
 - Use only the supplied snippet unless the user explicitly requests repository-context review.
 - Do not infer product requirements, framework context, localization requirements, or missing
   surrounding behavior.
+- Do not introduce framework-specific considerations unless the snippet identifies that
+  framework.
 - Treat placeholder-looking handlers such as `console.log`, mock data, and stubs as verified
   issues only when the user states that the snippet is complete production code. Otherwise list
   them under `## Context-dependent considerations`.
@@ -34,13 +36,15 @@ When reviewing a pasted snippet:
 ## Core workflow
 
 1. Understand the feature, page, component, or bug being reviewed.
-2. Inspect the relevant code before making claims.
+2. Inspect the relevant code before making claims. For repository reviews, inspect `package.json`,
+   `next.config.*`, and adjacent modules when framework behavior depends on them.
 3. Identify production-breaking issues first.
 4. Check framework boundaries:
    - React rendering and hooks
    - Next.js Server/Client Component boundary
    - data fetching and cache behavior
    - routing, metadata, redirects, and environment variables
+   - Server Actions, route handlers, and frontend security boundaries
 5. Check UI quality:
    - visual hierarchy
    - accessibility
@@ -100,11 +104,14 @@ Missing loading, empty, disabled, and error states are not just polish. They can
 Read these files only when relevant:
 
 - `references/checklist.md` — broad review checklist.
-- `references/react-nextjs.md` — React and Next.js review rules.
+- `references/react.md` — React rendering, state, hydration, and form rules.
+- `references/nextjs-app-router.md` — current Next.js 16 App Router review rules.
 - `references/data-fetching.md` — TanStack Query and API client review.
+- `references/frontend-security.md` — XSS, authorization, secrets, and browser security.
 - `references/ui-ux-accessibility.md` — UI, accessibility, and responsive design.
 - `references/performance-seo.md` — Core Web Vitals, metadata, redirects, and SEO.
 - `references/typescript.md` — TypeScript review patterns.
+- `references/i18n.md` — translation fallback, locale routing, and localized SEO.
 - `references/output-format.md` — required review output structure.
 - `references/sources.md` — official docs/blogs/videos used to create this skill.
 - `examples/good-review.md` — example of a concrete, severity-ordered review.

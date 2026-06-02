@@ -178,3 +178,31 @@ export function getApiBaseUrl(): string {
   return "http://localhost:8080";
 }
 ```
+
+## Exhaustiveness
+
+For discriminated unions, use `never` checking when missing a case would break behavior.
+
+```ts
+default: {
+  const exhaustive: never = state;
+  return exhaustive;
+}
+```
+
+## `satisfies`
+
+Use `satisfies` when an object must conform to a contract without losing narrow inference. This is
+useful for configuration maps, route metadata, and locale dictionaries.
+
+## Strict compiler options
+
+Treat compiler-option suggestions as context-dependent improvements, not automatic blockers.
+Useful options include:
+
+- `strict`
+- `noUncheckedIndexedAccess`
+- `exactOptionalPropertyTypes`
+
+When reviewing indexed access or optional-property bugs, inspect `tsconfig.json` before claiming
+the compiler already catches them.

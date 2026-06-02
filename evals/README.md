@@ -5,8 +5,9 @@ Use these evaluations to compare Codex reviews with and without
 
 ## Workflow
 
-1. Add a small frontend case under `cases/`.
-2. Add its expected findings under `answer-key/`.
+1. Choose a small frontend case under `cases/`.
+2. Read its expected findings under `answer-key/` only after the review runs.
+   Do not include answer-key files in the agent's review scope.
 3. Start a fresh Codex session and run the baseline prompt:
 
    ```txt
@@ -26,3 +27,13 @@ Use these evaluations to compare Codex reviews with and without
 
 Keep evaluation cases outside `skills/` so they are not installed with the
 published skill.
+
+## Included Suite
+
+The committed suite covers clean controls, isolated-snippet precision, React
+rendering and hydration, Next.js 16 App Router behavior, TanStack Query caching
+and waterfalls, frontend security, accessibility, performance, i18n, and
+TypeScript exhaustiveness.
+
+Run the complete suite before a release candidate. During development, run the
+changed category plus both clean controls.

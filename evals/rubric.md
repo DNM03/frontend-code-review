@@ -13,9 +13,9 @@ Initial targets:
 
 | Metric | Target |
 | --- | ---: |
-| Real issue recall | >= 80% |
-| False-positive rate | <= 15% |
-| Correct severity | >= 75% |
+| Real issue recall | >= 85% |
+| False-positive rate | <= 10% |
+| Correct severity | >= 80% |
 | Findings with precise locations | >= 90% |
 | Findings with actionable fixes | >= 90% |
 

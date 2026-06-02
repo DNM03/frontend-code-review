@@ -36,7 +36,8 @@ available.
 For pasted snippets, report verified issues separately from context-dependent
 considerations. Conditional concerns must not affect the final recommendation.
 Do not infer requirements from the surrounding repository unless the user asks
-for repository-context review.
+for repository-context review. Do not introduce framework-specific
+considerations unless the pasted snippet identifies that framework.
 
 ## Important improvements
 

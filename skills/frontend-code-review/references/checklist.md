@@ -24,6 +24,8 @@ Check for:
 - incorrect route params or search params handling
 - wrong environment variable usage
 - hidden production-only bugs
+- hydration mismatches
+- unexpected state resets caused by component position, type, or `key`
 
 ## 2. TypeScript
 
@@ -39,6 +41,8 @@ Check for:
 - weak component prop contracts
 - invalid generic usage
 - error values typed as `any` or assumed to be `Error`
+- incomplete discriminated-union handling
+- unsafe indexed access hidden by loose compiler settings
 
 ## 3. React
 
@@ -57,6 +61,8 @@ Check for:
 - stale closure bugs
 - too much state in one component
 - logic that should become a custom hook
+- controlled/uncontrolled input transitions
+- unstable external-store snapshots
 
 ## 4. Next.js
 
@@ -76,6 +82,11 @@ Check for:
 - i18n locale routing issues
 - locale key set mismatches and fallback behavior that can hide missing translations
 - environment files placed in the wrong app directory in monorepos
+- missing `loading.tsx`, `error.tsx`, or `not-found.tsx` handling where routes need it
+- missing Server Action authorization or validation
+- `cacheComponents` work outside close Suspense boundaries
+- wrong `updateTag`, `revalidateTag`, `revalidatePath`, or `refresh` semantics
+- slow data fetching or full authorization logic in Proxy
 
 ## 5. Data fetching and mutations
 
@@ -95,6 +106,10 @@ Check for:
 - token refresh race conditions
 - infinite retry loops
 - auth endpoints being retried incorrectly
+- retries on non-idempotent operations
+- stale request races without cancellation
+- serial or nested request waterfalls
+- unsafe SSR dehydration serialization
 
 ## 6. UI/UX
 
@@ -114,6 +129,7 @@ Check for:
 - poor mobile layout
 - horizontal overflow
 - weak focus point on admin/dashboard pages
+- motion without reduced-motion handling
 
 ## 7. Accessibility
 
@@ -130,6 +146,8 @@ Check for:
 - non-semantic table/list markup
 - custom controls without keyboard handling
 - `aria-*` used where native HTML would be better
+- dialogs without focus entry, trap, Escape handling, close control, or focus restoration
+- complex custom widgets without expected keyboard interactions
 
 ## 8. Performance
 
@@ -145,6 +163,8 @@ Check for:
 - repeated network calls
 - over-fetching
 - no pagination/virtualization for large lists
+- LCP images lazy-loaded or discovered too late
+- long interaction handlers that can hurt INP
 
 ## 9. SEO and shareability
 
@@ -158,3 +178,16 @@ Check for:
 - public pages accidentally `noindex`
 - client-only redirects for crawler-important routes
 - pages rendering only a spinner without JavaScript
+- sitemap, canonical, and hreflang equivalents disagreeing
+
+## 10. Frontend security
+
+Check for:
+
+- unsafe HTML sinks without sanitization
+- untrusted URLs passed into executable URL contexts
+- sensitive data serialized into Client Components
+- client-only authorization used as enforcement
+- cookie-authenticated mutations without an understood CSRF strategy
+- custom SSR serialization that embeds unescaped data
+- CSP treated as the only XSS defense

@@ -57,6 +57,17 @@ useQuery({
 
 Check that `queryFn` cannot run with `undefined` IDs.
 
+## Important defaults
+
+Review configuration with TanStack Query defaults in mind:
+
+- queries are stale by default
+- stale queries can refetch on mount, focus, and reconnect
+- retries can delay error UI and are unsafe for some endpoints
+- inactive queries remain cached before garbage collection
+
+Do not flag default refetching as a bug without understanding the intended freshness policy.
+
 ## Loading states
 
 For each query, check whether the UI handles:
@@ -150,6 +161,7 @@ For a custom fetch client, check:
 - timeout/cancellation support when needed
 - refresh token race handling
 - infinite retry prevention
+- cancellation or stale-response protection when requests can race
 
 ## Token refresh flow
 
@@ -169,3 +181,30 @@ Review for:
 - failed original request retrying endlessly
 - no fallback when refresh token is missing
 - requests continuing after logout
+
+## Request waterfalls
+
+Look for serial and nested requests that could run in parallel. Common patterns:
+
+- child queries mounted only after an unrelated parent query finishes
+- dependent queries where an API shape could avoid the extra round trip
+- multiple `useSuspenseQuery` calls that serialize inside one component
+
+When using Suspense for parallel queries, consider `useSuspenseQueries`.
+
+## SSR and hydration
+
+For SSR or React Server Component integrations, check:
+
+- a new server `QueryClient` is created per request
+- the browser does not recreate its `QueryClient` during initial suspension
+- dehydrated state is safely serialized before embedding in HTML
+- prefetches start early enough to avoid server-side waterfalls
+- pending-query dehydration is used deliberately when streaming
+
+Do not recommend custom SSR serialization with raw `JSON.stringify` for untrusted data.
+
+## Server state and editable forms
+
+Copying query data into local form state can be correct when it deliberately initializes an
+editable draft. Flag accidental copies that silently opt out of background server-state updates.
